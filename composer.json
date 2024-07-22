@@ -1,5 +1,5 @@
 {
-    "name": "accentinteractive/laravel-blocker",
+    "name": "vuorijv/laravel-blocker",
     "description": "Block bad bots and users that visit certain (exploit) urls for a set amount of time.",
     "keywords": [
         "accentinteractive",
