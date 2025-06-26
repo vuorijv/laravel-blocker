@@ -32,6 +32,14 @@ class BlockMaliciousUsers
     {
         $requestIp = request()->ip();
 
+        // Is this whitelisted IP
+        $whitelist = config('access.orange.ips', '');
+        $ipAddresses = explode(';', $whitelist);
+        if (in_array($request->ip(), $ipAddresses)) {
+            \Log::error('IP address is whitelisted', ['ip address', $request->ip()]);
+            return $next($request);
+        }
+
         // Is this a blocked IP?
         if ($this->checkUrlsOrAgents() && BlockedIpStore::has($requestIp)) {
             throw new BlockedUserException(__('You have been blocked'), 401);
